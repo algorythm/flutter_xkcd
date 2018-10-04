@@ -45,4 +45,5 @@ class XkcdReader {
 
   Xkcd get current => _currentXkcd;
   Xkcd get latest => _latestXkcd;
+  bool get isLatest => _currentXkcd.number == _latestXkcd.number;
 }

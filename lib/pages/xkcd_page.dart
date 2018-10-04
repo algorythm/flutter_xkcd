@@ -42,6 +42,7 @@ class XkcdPageState extends State<XkcdPage> {
   }
 
   void loadNextXkcd() async {
+    _loading = false;
     Xkcd xkcd = await _xkcdReader.nextXkcd();
 
     setState(() {
@@ -53,6 +54,7 @@ class XkcdPageState extends State<XkcdPage> {
   }
 
   void loadPreviousXkcd() async {
+    _loading = false;
     Xkcd xkcd = await _xkcdReader.previousXkcd();
 
     setState(() {
@@ -67,7 +69,7 @@ class XkcdPageState extends State<XkcdPage> {
   Widget build(BuildContext context) {
     return _currentXkcd == null
         ? new Center(child: new CircularProgressIndicator())
-        : new Card(
+        : SingleChildScrollView(child: new Card(
             margin: EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
             child: new Column(
               mainAxisSize: MainAxisSize.min,
@@ -91,6 +93,6 @@ class XkcdPageState extends State<XkcdPage> {
                   ],
                 ))
               ],
-            ));
+            )));
   }
 }
