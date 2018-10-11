@@ -8,6 +8,7 @@ class XkcdReader {
   Xkcd _currentXkcd;
 
   Future<Xkcd> fetchLatestXkcd() async {
+    print("Hej");
     final response = await http.get('https://xkcd.com/info.0.json');
 
     if (response.statusCode == 200) {
@@ -24,7 +25,7 @@ class XkcdReader {
 
   Future<Xkcd> fetchXkcd(int number) async {
     if (number > _latestXkcd.number || number <= 0) return null;
-    final response = await http.get('https://xkcd.com/' + number.toString() + '/info.0.json');
+    final response = await http.get('https://xkcd.com/$number/info.0.json');
 
     if (response.statusCode == 200) {
       Xkcd xkcd =  Xkcd.fromJson(json.decode(response.body));

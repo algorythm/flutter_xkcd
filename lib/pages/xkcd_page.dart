@@ -9,8 +9,8 @@ class XkcdPage extends StatefulWidget {
 }
 
 class XkcdPageState extends State<XkcdPage> {
-  XkcdReader _xkcdReader = new XkcdReader();
   Xkcd _currentXkcd;
+  XkcdReader _xkcdReader = new XkcdReader();
 
   Image _image;
   bool _loading = true;
@@ -20,7 +20,9 @@ class XkcdPageState extends State<XkcdPage> {
   //   _image = new Image.network(_currentXkcd.img);
   // }
 
+  @override
   void initState() {
+    super.initState();
     _xkcdReader.fetchLatestXkcd().then((xkcd) {
       setState(() {
         _currentXkcd = xkcd;
@@ -69,7 +71,8 @@ class XkcdPageState extends State<XkcdPage> {
   Widget build(BuildContext context) {
     return _currentXkcd == null
         ? new Center(child: new CircularProgressIndicator())
-        : SingleChildScrollView(child: new Card(
+        : SingleChildScrollView(
+          child: new Card(
             margin: EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
             child: new Column(
               mainAxisSize: MainAxisSize.min,
